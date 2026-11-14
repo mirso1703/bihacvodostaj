@@ -24,9 +24,9 @@ class WaterAlarmSensor(StationEntity, BinarySensorEntity):
     def is_on(self):
         r = self._reading
         if self.key == "official_warning": return int(r.get("severity",0)) >= 2
-        if self.key == "rapid_rise": return (r.get("rise_3h_cm") or 0) >= float(self.coordinator.entry.options.get(CONF_RISE, DEFAULT_RISE))
+        if self.key == "rapid_rise": return (r.get("rise_3h_cm") or 0) >= float({**self.coordinator.entry.data, **self.coordinator.entry.options}.get(CONF_RISE, DEFAULT_RISE))
         level = r.get("level_cm")
         if level is None: return None
-        threshold = float(self.coordinator.entry.options.get(CONF_THRESHOLD, DEFAULT_THRESHOLD))
+        threshold = float({**self.coordinator.entry.data, **self.coordinator.entry.options}.get(CONF_THRESHOLD, DEFAULT_THRESHOLD))
         if self.key == "approaching_threshold": return threshold-max(DEFAULT_WARN_BEFORE) <= level < threshold
         return level >= threshold
