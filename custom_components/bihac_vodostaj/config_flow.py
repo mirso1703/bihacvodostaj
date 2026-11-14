@@ -57,7 +57,7 @@ class BihacVodostajFlow(ConfigFlow, domain=DOMAIN):
             return await self._form(user_input, {"base":"select_station"})
         await self.async_set_unique_id(DOMAIN)
         self._abort_if_unique_id_configured()
-        return self.async_create_entry(title="Bihać Vodostaj", data={CONF_STATIONS:selected}, options={k:v for k,v in user_input.items() if k != CONF_STATIONS})
+        return self.async_create_entry(title="Bihać Vodostaj", data={**user_input, CONF_STATIONS:selected})
 
 class BihacVodostajOptionsFlow(OptionsFlow):
     async def async_step_init(self, user_input=None) -> ConfigFlowResult:
@@ -71,4 +71,4 @@ class BihacVodostajOptionsFlow(OptionsFlow):
         except WaterApiError:
             return self.async_show_form(step_id="init", data_schema=vol.Schema({}), errors={"base":"cannot_connect"})
         current = self.config_entry.options.get(CONF_STATIONS, self.config_entry.data[CONF_STATIONS])
-        return self.async_show_form(step_id="init", data_schema=_schema(_choices(rows, current), current, self.config_entry.options))
+        return self.async_show_form(step_id="init", data_schema=_schema(_choices(rows, current), current, {**self.config_entry.data, **self.config_entry.options}))
