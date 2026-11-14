@@ -6,6 +6,10 @@ Nakon instalacije preko HACS-a, [otvori Home Assistant i dodaj integraciju](http
 
 Integracija čita javne podatke hidroloških stanica Agencije za vodno područje rijeke Save sa vodostaji.voda.ba. Ne treba token ni SolarSense server.
 
+Ako dugme otvori adresu `homeassistant.local` koju Safari ne može dosegnuti, My Home Assistant u tom pregledniku ima zapamćenu pogrešnu adresu. Otvori [My Home Assistant](https://my.home-assistant.io/), zamijeni adresu instance adresom dostupnom s tog uređaja (npr. `http://IP_ADRESA:8123` na kućnoj mreži ili tvojom Nabu Casa/javnom HTTPS adresom), pa ponovo klikni dugme. URL se čuva lokalno u pregledniku. ([službene upute](https://www.home-assistant.io/integrations/my/))
+
+Ako link i dalje ne radi, u HACS-u ručno idi na **Integrations → ⋮ → Custom repositories**, dodaj `https://github.com/mirso1703/bihacvodostaj` kao **Integration**, instaliraj integraciju i restartuj Home Assistant.
+
 ## Instalacija
 
 Kopiraj `custom_components/bihac_vodostaj` u `/config/custom_components/bihac_vodostaj`, restartuj Home Assistant i dodaj **Bihać Vodostaj** iz Postavke → Uređaji i usluge. Izaberi jednu ili više stanica. Ripač (Una, 2035) je početni izbor. Stanice se kasnije mogu promijeniti kroz Konfiguriši.
