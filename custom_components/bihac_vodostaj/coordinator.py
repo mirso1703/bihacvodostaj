@@ -89,7 +89,7 @@ class WaterCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         return data
 
     def _emit_alerts(self, data: dict[str, Any]) -> None:
-        opts = self.entry.options
+        opts = {**self.entry.data, **self.entry.options}
         threshold = float(opts.get(CONF_THRESHOLD, DEFAULT_THRESHOLD))
         before = [float(x) for x in opts.get(CONF_WARN_BEFORE, DEFAULT_WARN_BEFORE)]
         rise_cm = float(opts.get(CONF_RISE, DEFAULT_RISE))
