@@ -1,5 +1,9 @@
 # Bihać Vodostaj za Home Assistant
 
+[![Dodaj Bihać Vodostaj u HACS](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=mirso1703&repository=bihacvodostaj&category=integration)
+
+Nakon instalacije preko HACS-a, [otvori Home Assistant i dodaj integraciju](https://my.home-assistant.io/redirect/config_flow_start/?domain=bihac_vodostaj).
+
 Integracija čita javne podatke hidroloških stanica Agencije za vodno područje rijeke Save sa vodostaji.voda.ba. Ne treba token ni SolarSense server.
 
 ## Instalacija
