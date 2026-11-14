@@ -91,7 +91,11 @@ class WaterCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     def _emit_alerts(self, data: dict[str, Any]) -> None:
         opts = {**self.entry.data, **self.entry.options}
         threshold = float(opts.get(CONF_THRESHOLD, DEFAULT_THRESHOLD))
-        before = [float(x) for x in opts.get(CONF_WARN_BEFORE, DEFAULT_WARN_BEFORE)]
+        raw_before = opts.get(CONF_WARN_BEFORE, DEFAULT_WARN_BEFORE)
+        if isinstance(raw_before, (int, float, str)):
+            before = [float(raw_before)]
+        else:
+            before = [float(x) for x in raw_before]
         rise_cm = float(opts.get(CONF_RISE, DEFAULT_RISE))
         rise_hours = int(opts.get(CONF_RISE_HOURS, DEFAULT_RISE_HOURS))
         for station, current in data.items():
