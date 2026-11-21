@@ -1,10 +1,14 @@
 """Shared station device information."""
 from homeassistant.helpers.device_registry import DeviceInfo
+from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from .const import DOMAIN, SOURCE
 
-class StationEntity:
+class StationEntity(CoordinatorEntity):
+    """Base entity; CoordinatorEntity keeps the coordinator polling and pushes updates to HA."""
+
     def __init__(self, coordinator, station: str, key: str) -> None:
-        self.coordinator, self.station_no, self.key = coordinator, station, key
+        super().__init__(coordinator)
+        self.station_no, self.key = station, key
         self._attr_unique_id = f"{station}_{key}"
         self._attr_has_entity_name = True
 
